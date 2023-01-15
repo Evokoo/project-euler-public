@@ -14,34 +14,44 @@ The same can be achieved by starting with 9 and multiplying by 1, 2, 3, 4, and 5
 What is the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1,2, ... , n) where n > 1?
 */
 
+export function isPandigital(digits: Set<number>): boolean {
+	let number = Array.from(digits)
+		.sort((a, b) => a - b)
+		.join("");
 
-const pandigitalNumbers: Set<number> = new Set();
-const number = 192;
-
-export function getDigits(n:number): number[] {
-    return [...String(n)].map(Number)
+	return number === "123456789";
 }
 
-
-for(let i = 0; i < 1_000_000; i++){
-for(let j = 1; j < 10; j++){
-    const uniqueNumbers: Set<number> = new Set();
-
-    let product: number = j * i,
-        digits: number[] = getDigits(product);
-
-    for(let digit of digits){
-        if(uniqueNumbers.has(digit)){
-            break;
-        }else{
-            uniqueNumbers.add(digit)
-        }
-    }
-    
-    if(uniqueNumbers.size === 9){
-        pandigitalNumbers.add(i)
-    }
-}
+export function concatNumber(digits: Set<number>): number {
+	let number = "";
+	digits.forEach((digit) => (number += digit));
+	return Number(number);
 }
 
-console.log(pandigitalNumbers)
+let maxNumber = 0;
+
+for (let i = 2; i < 10_000; i++) {
+	const uniqueNumbers: Set<number> = new Set();
+
+	for (let j = 1; j <= 10; j++) {
+		let product: number = j * i,
+			digits: number[] = [...String(product)].map(Number),
+			pandigital = true;
+
+		for (let digit of digits) {
+			if (uniqueNumbers.has(digit) || digit === 0) {
+				pandigital = false;
+				break;
+			} else {
+				uniqueNumbers.add(digit);
+			}
+		}
+		if (!pandigital) break;
+	}
+
+	if (isPandigital(uniqueNumbers)) {
+		maxNumber = Math.max(concatNumber(uniqueNumbers), maxNumber);
+	}
+}
+
+console.log(maxNumber);
