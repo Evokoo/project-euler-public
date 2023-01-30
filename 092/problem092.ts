@@ -23,8 +23,6 @@ function sumSquareDigits(n: number): number {
 }
 const validNumbers: Set<number> = new Set();
 
-console.time("Search");
-
 for (let i = 1; i < 10_000_000; i++) {
 	let n: number = sumSquareDigits(i);
 
@@ -40,4 +38,3 @@ for (let i = 1; i < 10_000_000; i++) {
 }
 
 console.log(validNumbers.size);
-console.timeEnd("Search");
