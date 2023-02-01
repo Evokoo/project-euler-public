@@ -34,7 +34,7 @@ function simplifyNumerals(numeral: string): string {
 	if (/CCCC/.test(output)) output = output.replace(/CCCC/, "CD");
 	// 10, 100, 1000
 	if (/VV/.test(output)) output = output.replace(/VV/, "X");
-	if (/VV/.test(output)) output = output.replace(/VV/, "C");
+	if (/LL/.test(output)) output = output.replace(/LL/, "C");
 	if (/DD/.test(output)) output = output.replace(/DD/, "M");
 
 	return numeral === output ? output : simplifyNumerals(output);
