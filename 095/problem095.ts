@@ -15,14 +15,28 @@ Since this chain returns to its starting point, it is called an amicable chain.
 Find the smallest member of the longest amicable chain with no element exceeding one million.
 */
 
-function sumProperDivisors(n: number): number {
-	let sum: number = 1;
+const divisors: Map<number, number[]> = new Map();
 
-	for (let i = 2; i < Math.sqrt(n); i++) {
+function getSum(input: number[]): number {
+	return input.reduce((acc, cur) => acc + cur, 0);
+}
+
+function getProperDivisors(n: number): number {
+	let properDivisors: Set<number> = new Set([1]);
+
+	for (let i = 2; i <= Math.sqrt(n); i++) {
 		if (n % i === 0) {
-			sum += i + n / i;
+			properDivisors.add(i);
+			properDivisors.add(n / i);
 		}
 	}
 
-	return sum;
+	divisors.set(n, Array.from(properDivisors));
+	return 0;
 }
+
+for (let i = 2; i < 1000; i++) {
+	getProperDivisors(i);
+}
+
+console.log(divisors);
