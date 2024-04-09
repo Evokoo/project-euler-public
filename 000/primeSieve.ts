@@ -1,4 +1,8 @@
 export default function primeSieve(min: number, max: number): number[] {
+	if (min < 2) {
+		min = 2;
+	}
+
 	const primes: boolean[] = new Array(max + 1).fill(true);
 	primes[0] = primes[1] = false;
 
