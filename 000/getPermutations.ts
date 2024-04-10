@@ -1,5 +1,5 @@
 export default function getPermutations(input: number[]): string[] {
-	const output: string[] = [];
+	const output: Set<string> = new Set();
 
 	const swap = (arr: number[], a: number, b: number): number[] => {
 		return ([arr[a], arr[b]] = [arr[b], arr[a]]);
@@ -7,7 +7,7 @@ export default function getPermutations(input: number[]): string[] {
 
 	const generate = (len: number, arr: number[]) => {
 		if (len === 1) {
-			output.push(arr.slice().join(""));
+			output.add(arr.slice().join(""));
 			return;
 		}
 
@@ -25,5 +25,5 @@ export default function getPermutations(input: number[]): string[] {
 
 	generate(input.length, input.slice());
 
-	return output;
+	return [...output];
 }
