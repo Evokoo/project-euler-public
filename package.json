@@ -10,9 +10,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/bun": "^1.0.12"
+    "@types/bun": "latest"
   },
   "dependencies": {
     "ts-node": "^10.9.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   }
 }
