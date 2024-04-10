@@ -1,18 +1,18 @@
 {
-	"name": "projecteuler",
-	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"_run": "bun $DIR/*.ts"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"devDependencies": {
-		"@types/bun": "^1.0.12"
-	},
-	"dependencies": {
-		"ts-node": "^10.9.2"
-	}
+  "name": "projecteuler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "_run": "bun $DIR/*.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bun": "^1.0.12"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.2"
+  }
 }
