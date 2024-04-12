@@ -23,9 +23,9 @@ function isSubStringDivisible(number: number | string) {
 	const divisors = [2, 3, 5, 7, 11, 13, 17];
 	const n = String(number);
 
-	for (let i = 1; i < n.length - 2; i++) {
-		const num = Number(n.slice(i, i + 3));
-		const divisor = divisors.shift()!;
+	for (let i = n.length; i > 3; i--) {
+		const num = Number(n.slice(i - 3, i));
+		const divisor = divisors.pop()!;
 
 		if (num % divisor !== 0) return false;
 	}
