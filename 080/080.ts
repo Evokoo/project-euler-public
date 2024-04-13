@@ -14,7 +14,8 @@ import Decimal from "decimal.js";
 Decimal.set({ precision: 105 });
 
 function irregularNumberSum(limit: number) {
-	const sum = (digits): number => [...digits].reduce((a, b) => a + +b, 0);
+	const sum = (digits: string): number =>
+		[...digits].reduce((a, b) => a + +b, 0);
 
 	let totalSum: number = 0;
 
@@ -22,7 +23,7 @@ function irregularNumberSum(limit: number) {
 		const root: Decimal = Decimal.sqrt(i);
 
 		if (!root.isInt()) {
-			const digits = root.toString().replace(/\./, "").slice(0, 100);
+			const digits: string = root.toString().replace(/\./, "").slice(0, 100);
 			totalSum += sum(digits);
 		}
 	}
