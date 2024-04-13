@@ -8,3 +8,26 @@ The square root of two is 1.41421356237309504880..., and the digital sum of the 
 
 For the first one hundred natural numbers, find the total of the digital sums of the first one hundred decimal digits for all the irrational square roots.
 */
+
+import Decimal from "decimal.js";
+
+Decimal.set({ precision: 105 });
+
+function irregularNumberSum(limit: number) {
+	const sum = (digits): number => [...digits].reduce((a, b) => a + +b, 0);
+
+	let totalSum: number = 0;
+
+	for (let i = 1; i < limit; i++) {
+		const root: Decimal = Decimal.sqrt(i);
+
+		if (!root.isInt()) {
+			const digits = root.toString().replace(/\./, "").slice(0, 100);
+			totalSum += sum(digits);
+		}
+	}
+
+	return totalSum;
+}
+
+console.log(irregularNumberSum(100));
