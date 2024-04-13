@@ -13,6 +13,7 @@
     "@types/bun": "latest"
   },
   "dependencies": {
+    "decimal.js": "^10.4.3",
     "ts-node": "^10.9.2"
   },
   "peerDependencies": {
