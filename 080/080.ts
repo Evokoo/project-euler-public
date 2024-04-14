@@ -1,4 +1,4 @@
-// Square root digital expansion
+// Square root digital expansion - Problem 80
 // https://projecteuler.net/problem=80
 
 /*
