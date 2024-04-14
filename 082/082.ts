@@ -10,7 +10,7 @@ The minimal path sum in the 5 by 5 matrix below, by starting in any cell in the 
 537 699 497 121 956
 805 732 524  37 331
 
-Find the minimal path sum from the top left to the bottom right by only moving right and down in matrix.txt, a 31K text file containing an 80 by 80 matrix.
+Find the minimal path sum from the left column to the right column in matrix.txt, a 31K text file containing an 80 by 80 matrix.
  */
 
 //Imports
