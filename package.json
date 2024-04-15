@@ -2,7 +2,7 @@
   "name": "projecteuler",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "_run": "bun $DIR/*.ts"
   },
