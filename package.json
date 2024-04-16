@@ -1,22 +1,22 @@
 {
-  "name": "projecteuler",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.ts",
-  "scripts": {
-    "_run": "bun $DIR/*.ts"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "dependencies": {
-    "decimal.js": "^10.4.3",
-    "ts-node": "^10.9.2"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  }
+	"name": "projecteuler",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.ts",
+	"scripts": {
+		"_run": "bun $DIR/*.ts"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/bun": "latest"
+	},
+	"dependencies": {
+		"decimal.js": "^10.4.3",
+		"ts-node": "^10.9.2"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0"
+	}
 }
