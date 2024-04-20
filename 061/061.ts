@@ -10,7 +10,7 @@ type Chain = {
 	chain: number[];
 	head: string;
 	tail: string;
-	numberSet: number;
+	usedSets: Set<number>;
 	sum: number;
 };
 
@@ -48,73 +48,57 @@ function getPolygonalNumberMaps(): PolygonalNumberMap[] {
 		PolyNum.octagonal,
 	].map((fn) => generatePolygonalNumberMap(1000, 10_000, fn));
 }
-function findChain() {
+export default function findChainSum() {
 	const polygonalNumbers = getPolygonalNumberMaps();
 	const queue: Chain[] = [
-		{ chain: [], head: "", tail: "", numberSet: 0, sum: 0 },
+		{ chain: [], head: "", tail: "", usedSets: new Set(), sum: 0 },
 	];
 
 	while (queue.length) {
-		const current = queue.shift()!;
+		const current = queue.pop()!;
 
-		if (current.numberSet === 6) {
-			console.log(current);
-			throw Error("Found?");
+		if (current.chain.length === 6) {
+			return current.sum;
 		}
 
-		for (let [num, { start, end }] of polygonalNumbers[current.numberSet]) {
-			if (current.numberSet === 0) {
-				queue.push({
-					chain: [num],
-					head: start,
-					tail: end,
-					numberSet: current.numberSet + 1,
-					sum: current.sum + num,
-				});
-			} else if (current.numberSet === 5) {
-				if (start === current.tail && end === current.head) {
+		for (let i = 0; i < polygonalNumbers.length; i++) {
+			if (current.usedSets.has(i)) {
+				continue;
+			}
+
+			for (let [num, { start, end }] of polygonalNumbers[i]) {
+				if (current.usedSets.size === 0) {
 					queue.push({
-						chain: [...current.chain, num],
-						head: current.head,
+						chain: [num],
+						head: start,
 						tail: end,
-						numberSet: current.numberSet + 1,
+						usedSets: new Set([...current.usedSets, i]),
 						sum: current.sum + num,
 					});
-				}
-			} else {
-				if (start === current.tail) {
-					queue.push({
-						chain: [...current.chain, num],
-						head: current.head,
-						tail: end,
-						numberSet: current.numberSet + 1,
-						sum: current.sum + num,
-					});
+				} else if (current.usedSets.size === 5) {
+					if (start === current.tail && end === current.head) {
+						queue.push({
+							chain: [...current.chain, num],
+							head: current.head,
+							tail: end,
+							usedSets: new Set([...current.usedSets, i]),
+							sum: current.sum + num,
+						});
+					}
+				} else {
+					if (start === current.tail) {
+						queue.push({
+							chain: [...current.chain, num],
+							head: current.head,
+							tail: end,
+							usedSets: new Set([...current.usedSets, i]),
+							sum: current.sum + num,
+						});
+					}
 				}
 			}
 		}
 	}
 
-	console.log(chains);
 	throw Error("Chain not found");
-}
-
-// findChain();
-
-const pnums = getPolygonalNumberMaps();
-
-const head = [];
-
-for (let index of [0, 1]) {
-	for (let [num, { start, end }] of pnums[index]) {
-		if (index === 0) {
-			head.push({ num, start, end });
-		} else {
-			for (let n of head) {
-				if (end === n.start) {
-					console.log(n.num, num);
-				}
-			}
-		}
-	}
 }
