@@ -17,3 +17,42 @@ In contrast, some lengths of wire, like 20cm, cannot be bent to form an integer 
 
 Given that L is the length of the wire, for how many values of L <= 1,500,000can exactly one integer sided right angle triangle be formed?
 */
+
+import gcd from "../000/gcd";
+
+export default function singluarIntegerRightTriangles(limit: number) {
+	const validLengths: Map<number, number> = new Map();
+	const loopLimit = Math.sqrt(limit / 2);
+
+	let count = 0;
+
+	for (let m = 2; m <= loopLimit; m++) {
+		const mSq = m ** 2;
+
+		for (let n = 1; n < m; n++) {
+			if ((m + n) % 2 === 1 && gcd(m, n) === 1) {
+				const nSq = n ** 2;
+
+				const a = mSq - nSq;
+				const b = 2 * m * n;
+				const c = mSq + nSq;
+
+				for (let k = 1; true; k++) {
+					const perimeter = k * (a + b + c);
+
+					if (perimeter > limit) {
+						break;
+					} else {
+						const numCount = validLengths.get(perimeter) || 0;
+						validLengths.set(perimeter, numCount + 1);
+
+						if (numCount === 0) count++;
+						else if (numCount === 1) count--;
+					}
+				}
+			}
+		}
+	}
+
+	return count;
+}
