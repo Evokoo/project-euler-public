@@ -5,26 +5,8 @@
     See link for description
 */
 
-import factorsOfN from "../000/factorsOfN";
-import isPrime from "../000/isPrime";
+import totientOfN from "../000/totientOfN";
 
-function totientOfN(n: number) {
-	if (isPrime(n)) {
-		return n - 1;
-	} else {
-		const factors: number[] = factorsOfN(n);
-		const primeFactors: number[] = factors.filter((factor) => isPrime(factor));
-
-		let product = n;
-
-		for (let i = 0; i < primeFactors.length; i++) {
-			const p = primeFactors[i];
-			product *= 1 - 1 / p;
-		}
-
-		return Math.floor(product);
-	}
-}
 export default function maximumTotient(limit: number): {
 	n: number;
 	ratio: number;
