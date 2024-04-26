@@ -18,7 +18,7 @@ import readTextFile from "../000/readTextFile";
 
 //Types
 type Point = { x: number; y: number };
-type Path = Point & { total: number };
+type Path = { pos: Point; total: number; path: string[] };
 type Matrix = number[][];
 
 function getMatrix(filename: string): number[][] {
@@ -45,3 +45,48 @@ function getNeighbours(point: Point, size: number) {
 
 	return neighbours;
 }
+function findPath(filename: string = "example") {
+	const matrix: Matrix = getMatrix(filename);
+	const size: number = matrix.length - 1;
+	const start: Point = { x: 0, y: 0 };
+	const end: Point = { x: size, y: size };
+
+	return DFS(start, end, matrix, size);
+}
+function DFS(start: Point, end: Point, matrix: Matrix, size: number) {
+	const queue: Path[] = [
+		{
+			pos: start,
+			total: matrix[start.y][start.y],
+			path: [`${start.x},${start.y}`],
+		},
+	];
+	const seen: Set<string> = new Set();
+
+	while (queue.length) {
+		const current = queue.shift()!;
+		const coord = `${current.pos.x},${current.pos.y}`;
+
+		if (current.pos.x === end.x && current.pos.y === end.y) {
+			return current.total;
+		}
+
+		if (seen.has(coord)) {
+			continue;
+		} else {
+			seen.add(coord);
+		}
+
+		for (let neighbour of getNeighbours(current.pos, size)) {
+			queue.push({
+				pos: { x: neighbour.x, y: neighbour.y },
+				total: current.total + matrix[neighbour.y][neighbour.x],
+				path: [...current.path, `${neighbour.x},${neighbour.y}`],
+			});
+		}
+
+		queue.sort((a, b) => a.total - b.total);
+	}
+}
+
+findPath("matrix");
