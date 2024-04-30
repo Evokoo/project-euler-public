@@ -28,4 +28,10 @@ export default class Arithmetic {
 	static isOdd(n: number): boolean {
 		return !this.isEven(n);
 	}
+
+	// Sequential sum, the total of numbers from n to m
+	static sequentialSum(start: number, end: number): number {
+		const len: number = end - start + 1;
+		return (len * (start + end)) / 2;
+	}
 }
