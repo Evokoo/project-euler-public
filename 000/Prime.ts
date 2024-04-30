@@ -52,4 +52,16 @@ export default class Prime {
 
 		return primes[n - 1];
 	}
+
+	static primeFactors(n: number): number[] {
+		let factors: number[] = [];
+
+		for (let i = 2; i < Math.sqrt(n); i++) {
+			if (n % i === 0 && this.isPrime(i)) {
+				factors.push(i);
+			}
+		}
+
+		return factors;
+	}
 }
