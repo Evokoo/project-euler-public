@@ -18,7 +18,7 @@ export default class Prime {
 		primes[0] = false;
 		primes[1] = false;
 
-		for (let p = 2; p * p <= Math.sqrt(max); p++) {
+		for (let p = 2; p * p <= max; p++) {
 			if (!primes[p]) continue;
 
 			for (let i = p * p; i <= max; i += p) {
@@ -42,7 +42,7 @@ export default class Prime {
 
 	// Get nth Prime number
 	static nthPrime(n: number): number {
-		let max = n * n;
+		let max = n * 2;
 		let primes: number[] = [];
 
 		while (primes.length < n) {
