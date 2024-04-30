@@ -6,12 +6,16 @@ If we list all the natural numbers below 10 that are multiples of 3 or 5, we get
 Find the sum of all the multiples of 3 or 5 below 1000.
 */
 
-let sum = 0;
+function fizzBuzzSum(limit: number): number {
+	let sum: number = 0;
 
-for (let i = 0; i < 1000; i++) {
-	if (i % 15 === 0 || i % 5 === 0 || i % 3 === 0) {
-		sum += i;
+	for (let i = 0; i < 1000; i++) {
+		if (i % 15 === 0 || i % 5 === 0 || i % 3 === 0) {
+			sum += i;
+		}
 	}
+
+	return sum;
 }
 
-console.log(sum);
+console.log(fizzBuzzSum(1000));
