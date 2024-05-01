@@ -34,4 +34,41 @@ export default class Arithmetic {
 		const len: number = end - start + 1;
 		return (len * (start + end)) / 2;
 	}
+
+	// Add two string INTEGERS together
+	// Useful for very large numbers
+	static stringAddition(numbers: string[]): string {
+		// Validate numbers, if valid sort by length
+		if (numbers.some((number) => !/^\d+$/.test(number))) {
+			throw TypeError("Strings can only contain digits 0-9");
+		} else {
+			numbers.sort((a, b) => b.length - a.length);
+		}
+
+		let total: string = numbers.shift()!;
+
+		for (let number of numbers) {
+			const newTotal: string[] = [];
+			const current = number.padStart(total.length, "0");
+
+			let carry: number = 0;
+
+			for (let i = total.length - 1; i >= 0; i--) {
+				const n1: number = Number(total[i]);
+				const n2: number = Number(current[i]);
+				const n3: number = n1 + n2 + carry;
+
+				if (i === 0) {
+					newTotal.unshift(String(n3));
+				} else {
+					newTotal.unshift(String(n3 % 10));
+					carry = n3 >= 10 ? 1 : 0;
+				}
+			}
+
+			total = newTotal.join("");
+		}
+
+		return total;
+	}
 }
