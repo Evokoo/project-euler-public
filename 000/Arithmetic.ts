@@ -71,4 +71,39 @@ export default class Arithmetic {
 
 		return total;
 	}
+
+	// Get the nth power of 2
+	// Useful for large exponents
+	static nthPowerOfTwo(exponent: number): string {
+		if (exponent < 0) {
+			throw RangeError("Exponent cannot be negative");
+		}
+
+		if (exponent === 0) {
+			return "1";
+		}
+
+		let total: string = "2";
+
+		for (let e = 0; e < exponent - 1; e++) {
+			const newTotal: string[] = [];
+
+			let carry: number = 0;
+
+			for (let d = total.length - 1; d >= 0; d--) {
+				const product: number = Number(total[d]) * 2 + carry;
+
+				if (d === 0) {
+					newTotal.unshift(String(product));
+				} else {
+					newTotal.unshift(String(product % 10));
+					carry = product >= 10 ? 1 : 0;
+				}
+			}
+
+			total = newTotal.join("");
+		}
+
+		return total;
+	}
 }
