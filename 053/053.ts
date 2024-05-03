@@ -3,10 +3,12 @@
 
 /* see link for details */
 
-import factorial from "../000/factorial";
+import Factorial from "../000/factorial";
 
 function combinationCount(n: number, r: number): number {
-	return factorial(n) / (factorial(r) * factorial(n - r));
+	return (
+		Factorial<number>(n) / (Factorial<number>(r) * Factorial<number>(n - r))
+	);
 }
 
 export default function combinatoricCount(limit: number) {
