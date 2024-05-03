@@ -1,7 +1,19 @@
-type Point = { x: number; y: number; z?: number };
+import { Point } from "./types";
+
+/**
+ * Utility class for calculating distance.
+ * This class provides methods for computing distances between points
+ * in different dimensional spaces using different distance formulas.
+ */
 
 export default class Distance {
-	// Straight line distance between two points
+	/**
+	 * Calculates the Euclidean distance between two points in 3D space.
+	 * @param {Point} a - The first point.
+	 * @param {Point} b - The second point.
+	 * @returns {number} The Euclidean distance between the points.
+	 */
+
 	static euclidean(a: Point, b: Point): number {
 		a.z = a.z ?? 0;
 		b.z = b.z ?? 0;
@@ -9,7 +21,14 @@ export default class Distance {
 		return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2 + (a.z - b.z) ** 2);
 	}
 
-	// Distance between two points on a grid where diagonal movement is not allowed
+	/**
+	 * Calculates the Manhattan distance between two points
+	 * where movement is restricted to vertical and horiztonal
+	 * @param {Point} a - The first point.
+	 * @param {Point} b - The second point.
+	 * @returns {number} The Manhattan distance between the points.
+	 */
+
 	static manhattan(a: Point, b: Point): number {
 		a.z = a.z ?? 0;
 		b.z = b.z ?? 0;
@@ -17,7 +36,14 @@ export default class Distance {
 		return Math.abs(b.x - a.x) + Math.abs(b.y - a.y) + Math.abs(b.z - a.z);
 	}
 
-	// Distance between two points on a grid where diagonal movement is allowed
+	/**
+	 * Calculates the Chebyshev distance between two points
+	 * where vertical, horiztonal and diagonal movment is allowed.
+	 * @param {Point} a - The first point.
+	 * @param {Point} b - The second point.
+	 * @returns {number} The Chebyshev distance between the points.
+	 */
+
 	static chebyshev(a: Point, b: Point): number {
 		a.z = a.z ?? 0;
 		b.z = b.z ?? 0;
