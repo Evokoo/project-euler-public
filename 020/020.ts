@@ -11,10 +11,10 @@
 */
 
 import Arithmetic from "../000/Arithmetic";
-import Factorial from "../000/factorial";
+import factorial from "../000/factorial";
 
 function factorialDigitSum(n: number): number {
-	const nFactorial: bigint = Factorial<bigint>(BigInt(n));
+	const nFactorial: bigint = factorial<bigint>(BigInt(n));
 	const digits: number[] = [...String(nFactorial)].map(Number);
 
 	return Arithmetic.sum(digits);
