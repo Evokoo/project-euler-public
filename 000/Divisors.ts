@@ -1,5 +1,5 @@
 /**
- * Class for generating divisors
+ * Utility class for generating divisors of n
  */
 
 export default class Divisors {
