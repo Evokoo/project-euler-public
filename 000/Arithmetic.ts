@@ -177,4 +177,32 @@ export default class Arithmetic {
 
 		return total;
 	}
+
+	/**
+	 * Checks if a number is pandigital.
+	 * A pandigital number contains each digit from 0 to n exactly once, 0 < n <= 9
+	 * @param {number} n - Input `number` to test
+	 * @param {boolean} [includeZero = false] - Include zero or not, default is `false`
+	 * @returns {boolean} Indication if `number` is pandigital
+	 */
+	static isPandigital(n: number, includeZero: boolean = false): boolean {
+		const digitSet: Set<number> = new Set();
+		const digits: number[] = [...String(n)].map(Number);
+
+		if (
+			(includeZero && digits.length > 10) ||
+			(!includeZero && digits.length > 9)
+		) {
+			throw RangeError("Input length exceeds maxium length");
+		}
+
+		for (let digit of digits) {
+			if (!includeZero && digit === 0) return false;
+			if (digitSet.has(digit)) return false;
+
+			digitSet.add(digit);
+		}
+
+		return digitSet.size === digits.length;
+	}
 }
