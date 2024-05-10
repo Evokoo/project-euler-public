@@ -137,4 +137,27 @@ export default class Misc {
 			return [...rotations].at(-1) as T;
 		}
 	}
+
+	/**
+	 * Get the value of character A-Z, test is case insensitive.
+	 * @param {string} char - Single character to test
+	 * @returns {number} Alphabet index of character
+	 * @throws {RangeError} - Must be a single character
+	 * @throws {RangeError} - Must be a character between A and Z
+	 * @example
+	 * Misc.alphabetScore("A") returns 1;
+	 * Misc.alphabetScore("a") returns 1;
+	 * Misc.alphabetScore("Z") returns 26;
+	 * Misc.alphabetScore("z") returns 26;
+	 */
+	static alphabetScore(char: string): number {
+		if (char.trim().length !== 1) {
+			throw RangeError("Must be a single character");
+		}
+		if (/[^a-zA-Z]/.test(char)) {
+			throw RangeError("Character must be a character between A and Z");
+		}
+
+		return char.toLowerCase().charCodeAt(0) - 96;
+	}
 }
