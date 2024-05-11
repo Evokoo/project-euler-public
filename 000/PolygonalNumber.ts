@@ -31,12 +31,30 @@ export default class PolygonalNumber {
 	};
 
 	/**
+	 * Check if number is pentagonal
+	 * @param {number} n - `number` to test
+	 * @returns {boolean} Indication if input `number` is pentagonal
+	 */
+	static isPentagonal = (n: number): boolean => {
+		return Number.isInteger((1 + Math.sqrt(1 + 24 * n)) / 6);
+	};
+
+	/**
 	 * Generate the nth Hexagonal number
 	 * @param {number} n - nth number to get
 	 * @returns {number} nth Hexagonal number
 	 */
 	static hexagonal = (n: number): number => {
 		return n * (2 * n - 1);
+	};
+
+	/**
+	 * Check if number is hexagonal
+	 * @param {number} n - `number` to test
+	 * @returns {boolean} Indication if input `number` is hexagonal
+	 */
+	static isHexagonal = (n: number): boolean => {
+		return Number.isInteger((Math.sqrt(8 * n + 1) + 1) / 4);
 	};
 
 	/**

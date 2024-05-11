@@ -1,5 +1,13 @@
+/**
+ * Utility helper class for Prime numbers
+ */
+
 export default class Prime {
-	//Check if number is prime
+	/**
+	 * Check primality of a number
+	 * @param {number} n - `number` to test
+	 * @returns {boolean} Indication if a number is Prime
+	 */
 	static isPrime(n: number): boolean {
 		let limit: number = Math.sqrt(n);
 
@@ -10,6 +18,13 @@ export default class Prime {
 		return n > 1;
 	}
 
+	/**
+	 * @private
+	 * Algorithim for generating prime numbers efficently
+	 * @param {number} min - minimum of generated range
+	 * @param {number} max - maximum of generated range
+	 * @returns {Array<number>} Prime numbers within min and max range;
+	 */
 	private static eratosthenesSieve(min: number, max: number): number[] {
 		if (min < 2) min = 2;
 
@@ -35,12 +50,22 @@ export default class Prime {
 		return output;
 	}
 
-	// Generator Prime numbers between min and max values
+	/**
+	 * Generate Prime numbers between min and max values
+	 * @param {number} min - minimum of generated range
+	 * @param {number} max - maximum of generated range
+	 * @returns {Array<number>} Prime numbers within min and max range;
+	 */
 	static generatePrimes(min: number, max: number): number[] {
 		return this.eratosthenesSieve(min, max);
 	}
 
-	// Get nth Prime number
+	/**
+	 * Get the nth prime number
+	 * @param {number} n - nth prime to find
+	 * @returns {number} nth prime
+	 * @borrows {@link Prime.generatePrimes()}
+	 */
 	static nthPrime(n: number): number {
 		let max = n * 2;
 		let primes: number[] = [];
@@ -53,6 +78,12 @@ export default class Prime {
 		return primes[n - 1];
 	}
 
+	/**
+	 * Get prime factors of a `number`
+	 * @param {number} n - `number` to find prime factors of
+	 * @returns {Array<number>} Factors of n
+	 * @borrows {@link Prime.isPrime()}
+	 */
 	static primeFactors(n: number): number[] {
 		let factors: number[] = [];
 
