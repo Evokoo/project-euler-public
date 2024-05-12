@@ -81,15 +81,25 @@ export default class Prime {
 	/**
 	 * Get prime factors of a `number`
 	 * @param {number} n - `number` to find prime factors of
+	 * @param {Set<number>} primeSet - Pre generated prime number set (Optional)
 	 * @returns {Array<number>} Factors of n
 	 * @borrows {@link Prime.isPrime()}
 	 */
-	static primeFactors(n: number): number[] {
+	static primeFactors(n: number, primeSet?: Set<number>): number[] {
 		let factors: number[] = [];
 
-		for (let i = 2; i < Math.sqrt(n); i++) {
-			if (n % i === 0 && this.isPrime(i)) {
-				factors.push(i);
+		if (primeSet) {
+			for (let prime of primeSet) {
+				if (prime > n) break;
+				if (n % prime === 0) {
+					factors.push(prime);
+				}
+			}
+		} else {
+			for (let i = 2; i <= n / 2; i++) {
+				if (n % i === 0 && this.isPrime(i)) {
+					factors.push(i);
+				}
 			}
 		}
 
