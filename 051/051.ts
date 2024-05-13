@@ -9,8 +9,7 @@ By replacing the 3rd and 4th digits of 56**3 with the same digit, this 5-digit n
 Find the smallest prime which, by replacing part of the number (not necessarily adjacent digits) with the same digit, is part of an eight prime value family.
 */
 
-import isPrime from "../000/isPrime";
-import primeSieve from "../000/primeSieve";
+import Prime from "../000/Prime";
 
 function getDigitCount(n: number) {
 	const count = Array(10).fill(0);
@@ -22,12 +21,11 @@ function getDigitCount(n: number) {
 
 	return count;
 }
-
 export default function smallestPrimeDigitReplacment(
 	familySize: number,
 	maxPrime: number = 1_000_000
 ) {
-	const primes = primeSieve(2, maxPrime);
+	const primes: number[] = Prime.generatePrimes(2, maxPrime);
 
 	for (let prime of primes) {
 		const primeStr = String(prime);
@@ -40,7 +38,7 @@ export default function smallestPrimeDigitReplacment(
 				for (let n = 0; n < 10; n++) {
 					const variation = +primeStr.replace(pattern, String(n));
 
-					if (variation >= prime && isPrime(variation)) {
+					if (variation >= prime && Prime.isPrime(variation)) {
 						primeCount++;
 					}
 				}
@@ -55,4 +53,4 @@ export default function smallestPrimeDigitReplacment(
 	throw Error("Prime number not found");
 }
 
-// console.log(smallestPrimeDigitReplacment(8));
+console.log(smallestPrimeDigitReplacment(8));
