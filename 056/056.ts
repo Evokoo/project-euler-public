@@ -7,20 +7,21 @@ A googol (10100) is a massive number: one followed by one-hundred zeros; 100100 
 Considering natural numbers of the form, ab, where a, b < 100, what is the maximum digital sum?
 */
 
-let maxSum: number = 0;
+import Arithmetic from "../000/Arithmetic";
 
-function sumDigits(n: bigint): number {
-	let digits = [...String(n)].map(Number),
-		sum = digits.reduce((acc, cur) => acc + cur, 0);
+function powerfulDigitSum(limit: bigint): number {
+	let maxSum: number = 0;
 
-	return sum;
-}
+	for (let a = 1n; a < limit; a++) {
+		for (let b = 2n; b < limit; b++) {
+			const digits = [...String(a ** b)].map(Number);
+			const sum = Arithmetic.sum(digits);
 
-for (let a = 1n; a < 100; a++) {
-	for (let b = 2n; b < 100; b++) {
-		let digitSum: number = sumDigits(a ** b);
-		maxSum = Math.max(digitSum, maxSum);
+			maxSum = Math.max(sum, maxSum);
+		}
 	}
+
+	return maxSum;
 }
 
-console.log(maxSum);
+powerfulDigitSum(100n);
