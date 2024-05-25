@@ -19,9 +19,9 @@ roman.txt contains one thousand numbers written in valid, but not necessarily mi
 Find the number of characters saved by writing each of these in their minimal form.
 */
 
-import readTextFile from "../000/readTextFile.js";
+import IO from "../000/IO.js";
 
-function simplifyNumerals(numeral: string): string {
+function simplifyNumeral(numeral: string): string {
 	let output: string = numeral;
 
 	// 9, 90, 900
@@ -37,16 +37,16 @@ function simplifyNumerals(numeral: string): string {
 	if (/LL/.test(output)) output = output.replace(/LL/, "C");
 	if (/DD/.test(output)) output = output.replace(/DD/, "M");
 
-	return numeral === output ? output : simplifyNumerals(output);
+	return numeral === output ? output : simplifyNumeral(output);
 }
 
-const numerals = readTextFile("roman").match(/\w+/g);
+function savedCharacterCount(filename: string): number {
+	const numerals = IO.readFile(filename).split("\r\n");
+	const count = numerals.reduce((sum, numeral) => {
+		return sum + (numeral.length - simplifyNumeral(numeral).length);
+	}, 0);
 
-let count = 0;
-
-for (let numeral of numerals) {
-	let difference: number = numeral.length - simplifyNumerals(numeral).length;
-	count += difference;
+	return count;
 }
 
-console.log(count);
+console.log(savedCharacterCount("roman"));
