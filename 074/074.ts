@@ -23,40 +23,42 @@ Starting with 69 produces a chain of five non-repeating terms, but the longest n
 How many chains, with a starting number below one million, contain exactly sixty non-repeating terms?
 */
 
-function sumFactorials(n: number): number {
-	const factorials: Record<string, number> = {
-		"0": 1,
-		"1": 1,
-		"2": 2,
-		"3": 6,
-		"4": 24,
-		"5": 120,
-		"6": 720,
-		"7": 5_040,
-		"8": 40_320,
-		"9": 362_880,
-	};
+import factorial from "../000/factorial";
 
-	let digits: string[] = [...String(n)],
-		sum: number = digits.reduce((acc, cur) => acc + factorials[cur], 0);
+function generateFactorials(limit: number): Map<number, number> {
+	const factorials: Map<number, number> = new Map();
 
-	return sum;
-}
-
-const validNumbers: Set<number> = new Set();
-
-for (let i = 1; i < 1_000_000; i++) {
-	let terms: Set<number> = new Set([i]),
-		n: number = sumFactorials(i);
-
-	while (!terms.has(n)) {
-		terms.add(n);
-		n = sumFactorials(n);
+	for (let i = 0; i < limit; i++) {
+		if (i === 0) factorials.set(i, 1);
+		else factorials.set(i, factorial(i));
 	}
 
-	if (terms.size === 60) {
-		validNumbers.add(i);
-	}
+	return factorials;
 }
 
-console.log(validNumbers);
+function findDigitFactorialChains(limit: number): number {
+	const factorials = generateFactorials(10);
+	const validNumbers: Set<number> = new Set();
+
+	function factorialSum(n: number): number {
+		return [...String(n)].reduce((acc, cur) => acc + factorials.get(+cur)!, 0);
+	}
+
+	for (let i = 1; i < 1_000_000; i++) {
+		let terms: Set<number> = new Set([i]),
+			n: number = factorialSum(i);
+
+		while (!terms.has(n)) {
+			terms.add(n);
+			n = factorialSum(n);
+		}
+
+		if (terms.size === limit) {
+			validNumbers.add(i);
+		}
+	}
+
+	return validNumbers.size;
+}
+
+findDigitFactorialChains(60);
