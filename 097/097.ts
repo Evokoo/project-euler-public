@@ -9,8 +9,12 @@ However, in 2004 there was found a massive non-Mersenne prime which contains 2,3
 Find the last ten digits of this prime number.
 */
 
-let a: bigint = 2n ** 7830457n,
-	b: bigint = 28433n * a + 1n,
-	digits: string = String(b).slice(-10);
+function merseenPrime(): string {
+	let a: bigint = 2n ** 7830457n,
+		b: bigint = 28433n * a + 1n,
+		digits: string = String(b).slice(-10);
 
-console.log(digits);
+	return digits;
+}
+
+console.log(merseenPrime());
