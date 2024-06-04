@@ -12,14 +12,11 @@ What is the largest square number formed by any member of such a pair?
 
 import IO from "../000/IO";
 
+function sortedString(input: string | number): string{
+    input = typeof input === "string" ? input : String(input);
+    return [...input].sort().join("");
+}
 function isAnagram(a: string | number, b:string | number): boolean{
-    function sortedString(word: string){
-        return [...word].sort().join("");
-    }
-
-    a = typeof a === "string" ? a : String(a);
-    b = typeof b === "string" ? b : String(b);
-
     return sortedString(a) === sortedString(b);
 }
 function anagramWords(filename: string): Map<string,string[]>{
@@ -37,54 +34,51 @@ function anagramWords(filename: string): Map<string,string[]>{
 
     return map;
 }
-function anagramSquares(): Map<number, number[]>{
-    const map: Map<number, number[]> = new Map();
+function anagramSquares(): Map<string, number[]>{
+    const map: Map<string, number[]> = new Map();
 
-    for(let i = 1; i ** 2 < 1_000_000; i++){
-        const aSqr = i ** 2;
-        const limit = 10 ** String(aSqr).length;
-
-        for(let j = 1; j ** 2 <= limit; j++){
-            const bSqr = j ** 2;
-
-            if(!map.has(bSqr) && aSqr !== bSqr && isAnagram(aSqr, bSqr)){
-                map.set(aSqr, [...(map.get(aSqr) || []), bSqr]);
-            }
-        }
+    for(let i = 1; i ** 2 < 1_000_000_000; i++){
+        const sqr = i ** 2
+        const pattern = sortedString(sqr);
+        map.set(pattern, [...(map.get(pattern) || []), sqr]);
     }
-
 
     return map;
 }
-
 function largestAnagramicSquare(filename: string){
     const wordAnagrams: Map<string, string[]> = anagramWords(filename);
-    const squareAnagrams: Map<number, number[]> = anagramSquares();
+    const squareAnagrams: Map<string, number[]> = anagramSquares();
 
     let largest = 0;
 
-    for(let [keyword, words] of [...wordAnagrams]){
-        
+    for(let [base,permutations] of [...wordAnagrams]){
+        patterns: for(let [pattern, squares] of [...squareAnagrams]){
+            if(pattern.length !== base.length) continue;
 
-        for(let [keysquare, squares] of [...squareAnagrams]){
-            if(String(keysquare).length !== keyword.length) continue;
+            const characters: Map<string, string> = new Map();
+            const digits: string = String([...squares].shift()!)
 
-            const characters: Record<string, number> = {};
-            const digits = String(keysquare);
+            for(let i = 0; i < base.length; i++){
+                const char = base[i];
+                const digit = digits[i];
 
-            for(let i = 0; i < digits.length; i++){
-                characters[keyword[i]] = +digits[i];
+                if(characters.has(digit)){
+                    continue patterns;
+                }else{
+                    characters.set(digit, char);
+                }
             }
 
-            let match = words.find((word) => squares.includes(+[...word].map(c => characters[c] ?? "_").join("")));
+            let combinations = squares.map(n => String(n).replace(/./g, ($) => characters.get($) ?? "_"));
+            let valueIndex = combinations.findIndex(word => permutations.includes(word));
 
-            if(match){
-                largest = Math.max(largest, keysquare);
-            }  
+            if(valueIndex >= 0){
+                largest = Math.max(largest, squares[valueIndex]);
+            }
         }
     }
 
-    console.log(squareAnagrams.get(largest));
+    return largest;
 }
 
-largestAnagramicSquare("words");
+console.log(largestAnagramicSquare("words"))
