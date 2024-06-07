@@ -2,6 +2,8 @@
  * Binary Search Class
  */
 
+//TODO: DRY Princples - make private method to handle opertions as they share much the same code.
+
 export class BinarySearch {
 	/**
 	 * @private Validates the input array.
