@@ -27,4 +27,18 @@ describe("Binary Search Tests", () => {
 		const notFound: number = BinarySearch.indexOfN(10, arr);
 		expect(notFound).toBe(-1);
 	});
+
+	describe("Validation", () => {
+		test("Empty Array", () => {
+			expect(() => BinarySearch.lessThan(0, [])).toThrowError(
+				"Array cannot be empty"
+			);
+		});
+
+		test("Unorderd Array", () => {
+			expect(() => BinarySearch.lessThan(0, [0, 2, 1])).toThrowError(
+				"Array is not sorted"
+			);
+		});
+	});
 });
