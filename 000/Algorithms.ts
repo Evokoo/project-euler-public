@@ -5,31 +5,20 @@
 //TODO: Add validation - input must be sorted and cannot be empty
 
 export class BinarySearch {
-	private searchArr: number[];
-	private searchArrLen: number;
-
-	/**
-	 * Preform a binary search on a `SORTED` array.
-	 * @param {Array<number>} numbers - Array to search
-	 */
-	constructor(numbers: number[]) {
-		this.searchArr = numbers;
-		this.searchArrLen = numbers.length;
-	}
-
 	/**
 	 * Find the last index < `value`
 	 * @param {number} value - Target value
+	 * @param {Array<number>} arr - Array to search
 	 * @returns {number} Last index < `value`
 	 */
-	lessThan(value: number): number {
+	static lessThan(value: number, arr: number[]): number {
 		let l = 0;
-		let r = this.searchArrLen - 1;
+		let r = arr.length - 1;
 
 		while (l <= r) {
 			const m = Math.floor((l + r) / 2);
 
-			if (this.searchArr[m] < value) {
+			if (arr[m] < value) {
 				l = m + 1;
 			} else {
 				r = m - 1;
@@ -42,16 +31,17 @@ export class BinarySearch {
 	/**
 	 * Find the first index > `value`
 	 * @param {number} value - Target value
+	 * @param {Array<number>} arr - Array to search
 	 * @returns {number} First index > `value`
 	 */
-	greaterThan(value: number): number {
+	static greaterThan(value: number, arr: number[]): number {
 		let l = 0;
-		let r = this.searchArrLen - 1;
+		let r = arr.length - 1;
 
 		while (l <= r) {
 			const m = Math.floor((l + r) / 2);
 
-			if (this.searchArr[m] <= value) {
+			if (arr[m] <= value) {
 				l = m + 1;
 			} else {
 				r = m - 1;
@@ -63,19 +53,20 @@ export class BinarySearch {
 
 	/**
 	 * Find the index of a `value`
-	 * @param {number} value - Number to find in arr
+	 * @param {number} value - Target value
+	 * @param {Array<number>} arr - Array to search
 	 * @returns {number} Index of `value` or `-1` if `value` not found
 	 */
-	indexOfN(value: number): number {
+	static indexOfN(value: number, arr: number[]): number {
 		let l = 0;
-		let r = this.searchArrLen - 1;
+		let r = arr.length - 1;
 
 		while (l <= r) {
 			const m = Math.floor((l + r) / 2);
 
-			if (this.searchArr[m] === value) {
+			if (arr[m] === value) {
 				return m;
-			} else if (this.searchArr[m] < value) {
+			} else if (arr[m] < value) {
 				l = m + 1;
 			} else {
 				r = m - 1;
