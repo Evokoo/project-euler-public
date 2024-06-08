@@ -17,13 +17,15 @@ function partition(length: number): bigint[] {
 			partitions[j] += partitions[j - i];
 		}
 
-		if (partitions[i] > 1_000_000n && partitions[i] % 1_000_000n === 0n) {
-			console.log({ i });
-			throw Error("Found");
-		}
+		console.log({ i, count: partitions[i] });
+
+		// if (partitions[i] > 1_000_000n && partitions[i] % 1_000_000n === 0n) {
+		// 	console.log({ i });
+		// 	throw Error("Found");
+		// }
 	}
 
 	return partitions;
 }
 
-const partitionCount = partitions(1_000_000);
+const partitionCount = partition(10);
