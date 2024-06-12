@@ -14,6 +14,28 @@ export default class Arithmetic {
 	}
 
 	/**
+	 * Get the sum of figits within a number
+	 * @param {string | number} input - `String | Number` to sum
+	 * @throws {Error} - Input must be an `Integer` value
+	 * @returns {number} sum of input digits
+	 * @borrows {@link Arithmetic.sum()}
+	 *
+	 * @example
+	 * Arithmetic.digitSum(123) -> 5;
+	 * Arithmetic.digitSum("333") -> 9;
+	 */
+	static digitSum(input: string | number): number {
+		if (
+			(typeof input === "string" && !/^\d+$/.test(input)) ||
+			(typeof input === "number" && input % 1 !== 0)
+		) {
+			throw Error("Input must be a valid integer");
+		}
+
+		return Arithmetic.sum([...String(input)].map(Number));
+	}
+
+	/**
 	 * Get the product of a number array
 	 * @param {Array<number>} numbers - Numbers to multiply
 	 * @param {number} [initialValue = 1] - Initial value (Optional)

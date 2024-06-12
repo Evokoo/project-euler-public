@@ -24,4 +24,20 @@ describe("Arithmetic Tests", () => {
 			);
 		});
 	});
+	describe("Digit Sum Tests", () => {
+		test("Valid string", () => {
+			expect(Arithmetic.digitSum("123")).toBe(6);
+		});
+		test("Valid number", () => {
+			expect(Arithmetic.digitSum(443)).toBe(11);
+		});
+		test("Invalid input", () => {
+			expect(() => Arithmetic.digitSum(43.2)).toThrowError(
+				"Input must be a valid integer"
+			);
+			expect(() => Arithmetic.digitSum("12A")).toThrowError(
+				"Input must be a valid integer"
+			);
+		});
+	});
 });
