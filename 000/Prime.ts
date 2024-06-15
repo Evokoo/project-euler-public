@@ -105,4 +105,42 @@ export default class Prime {
 
 		return factors;
 	}
+
+	/**
+	 * Get prime factors of a `number` with their exponents
+	 * @param {number} n - `number` to find prime factors of
+	 * @returns {Map<number, number>} Factors of n with their exponents
+	 */
+	static primeFactorsWithExponents(n: number): Map<number, number> {
+		const factors = new Map<number, number>();
+		let count = 0;
+
+		while (n % 2 === 0) {
+			count++;
+			n = n / 2;
+		}
+
+		if (count > 0) {
+			factors.set(2, count);
+		}
+
+		for (let i = 3; i <= Math.sqrt(n); i += 2) {
+			count = 0;
+
+			while (n % i === 0) {
+				count++;
+				n = n / i;
+			}
+
+			if (count > 0) {
+				factors.set(i, count);
+			}
+		}
+
+		if (n > 2) {
+			factors.set(n, 1);
+		}
+
+		return factors;
+	}
 }
