@@ -6,6 +6,7 @@ If we list all the natural numbers below 10 that are multiples of 3 or 5, we get
 Find the sum of all the multiples of 3 or 5 below 1000.
 */
 
+#include "../000/solve.h"
 #include <iostream>
 
 int problem_001(size_t limit = 1000){
@@ -21,8 +22,6 @@ int problem_001(size_t limit = 1000){
 }
 
 int main(){
-    std::cout << "Project Euler Problem 001" << std::endl;
-    std::cout << "Solution: " << std::to_string(problem_001(1000)) << std::endl;
-    return 0;
+    print_solution(std::to_string(problem_001(1000)), "001");
 }
 

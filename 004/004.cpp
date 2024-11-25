@@ -7,6 +7,7 @@ A palindromic number reads the same both ways. The largest palindrome made from 
 Find the largest palindrome made from the product of two 3-digit numbers.
 */
 
+#include "../000/solve.h"
 #include <iostream>
 #include <string>
 
@@ -42,7 +43,5 @@ int problem_004(){
 }
 
 int main(){
-    std::cout << "Project Euler Problem 004" << std::endl;
-    std::cout << "Solution: " << std::to_string(problem_004()) << std::endl;
-    return 0;
+    print_solution(std::to_string(problem_004()), "004");
 }
