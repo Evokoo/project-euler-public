@@ -14,7 +14,7 @@ export default class Arithmetic {
 	}
 
 	/**
-	 * Get the sum of figits within a number
+	 * Get the sum of digits within a number
 	 * @param {string | number} input - `String | Number` to sum
 	 * @throws {Error} - Input must be an `Integer` value
 	 * @returns {number} sum of input digits
